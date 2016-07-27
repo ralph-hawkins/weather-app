@@ -31,24 +31,3 @@ app.init = function(){
 };
 
 $(document).ready(app.init);
-
-// for reference:
-
-// var app = {  };
-
-// app.getData = function() {
-//   var countryCode = $(this).val();
-//   $.ajax({
-//     url: 'https://restcountries.eu/rest/v1/alpha/' + countryCode,
-//     success: function( response ){
-//       var capital = response.capital;
-//       $('#response').text(capital);
-//     }
-//   });
-// };
-
-// app.init = function() {
-//   $('#country').on( 'change', app.getData ).trigger('change');
-// };
-
-// $(document).ready(app.init);
