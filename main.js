@@ -12,22 +12,32 @@
 */
 var app = {};
 
-app.getWeather = function() {
-  var city = 'London';
+app.positionText = function(temperature){
+  var tempInCentigrade = Math.round(temperature - 273.15);
+  $('#temp').prepend(tempInCentigrade + '°C');
+};
+
+app.getWeather = function(done) {
+  var city = 'london';
   var weatherUrl = 'http://api.openweathermap.org/data/2.5/weather?q=';
   var apiKey = '676908f245f4b43ad56d973b12d493f4';
   var completeUrl = weatherUrl + city + '&appid=' + apiKey;
+  var temperature;
   $.ajax({
     url: weatherUrl + city + '&appid=' + apiKey,
     success: function(response){
-      var temperature = response.main.temp;
-      $('#temp').prepend(Math.round(temperature - 273.15) + '°C');
+      temperature = response.main.temp;
+      done(temperature); 
+      // var tempInCentigrade = Math.round(temperature - 273.15);
+      // $('#temp').prepend(tempInCentigrade + '°C');
+      // console.log(completeUrl);
     }
   });
 };
 
+
 app.init = function(){
-  app.getWeather();
+  app.getWeather(app.positionText);
 };
 
 $(document).ready(app.init);
